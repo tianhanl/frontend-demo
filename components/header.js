@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Toggler from './toggler';
-import Drawer from './drawer';
+import { Toggler } from './Toggler';
+import { Drawer } from './Drawer';
 
 const HeaderWrapper = styled.header`
   position: fixed;

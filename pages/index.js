@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import styled from 'styled-components';
-import Header from '../components/header';
-
+import Header from '../components/Header';
+import CharityProgramCard from '../components/CharityProgramCard';
+import Footer from '../components/Footer';
 // Styled components
 const FullHeightContainer = styled.div`
   background: ${props => props.theme.dark};
@@ -19,6 +20,8 @@ const IndexPage = () => (
       />
     </Head>
     <Header />
+    <CharityProgramCard />
+    <Footer />
   </FullHeightContainer>
 );
 
