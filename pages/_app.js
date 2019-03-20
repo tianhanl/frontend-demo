@@ -1,11 +1,7 @@
 import React from 'react';
 import App, { Container } from 'next/app';
 import { ThemeProvider } from 'styled-components';
-
-const theme = {
-  dark: '#24262e'
-};
-
+import { theme } from '../config';
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
