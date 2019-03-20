@@ -1,18 +1,25 @@
 import Head from 'next/head';
 import styled from 'styled-components';
+import Header from '../components/header';
 
 // Styled components
-const Title = styled.h1`
-  color: ${props => props.theme.dark};
+const FullHeightContainer = styled.div`
+  background: ${props => props.theme.dark};
+  /* Use vh since the container should cover the entire screen */
+  min-height: 100vh;
 `;
 
 const IndexPage = () => (
-  <div>
+  <FullHeightContainer>
     <Head>
       <title>Tencent Charity</title>
+      <meta
+        name="description"
+        content="Mobile page for Tencent's charity program"
+      />
     </Head>
-    <Title>test</Title>
-  </div>
+    <Header />
+  </FullHeightContainer>
 );
 
 export default IndexPage;
