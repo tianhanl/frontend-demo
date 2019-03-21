@@ -13,6 +13,8 @@ folder root.
 
 `static` - staitc files (images, etc.)
 
+`utils` - utility functions
+
 ## Development
 
 ```bash
