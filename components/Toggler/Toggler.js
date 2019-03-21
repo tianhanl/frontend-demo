@@ -1,57 +1,74 @@
 import styled from 'styled-components';
 
+const ICON_SIZE = 2;
+
 const Icon = styled.span`
   &,
   &::before,
   &::after {
     content: '';
     background: white;
-    border-radius: 3px;
+    border-radius: ${({ ratio }) => `${0.25 * ratio}rem`};
     display: block;
     position: absolute;
-    height: 4px;
-    width: 1.5rem;
-    transition: all 0.3s;
+    height: ${({ ratio }) => `${0.3 * ratio}rem`};
+    width: ${({ ratio }) => `${2 * ratio}rem`};
+    transition: all 0.2s;
   }
 
   & {
-    top: calc(1rem - 2px);
+    top: ${({ ratio }) => `${0.825 * ratio}rem`};
     background-color: ${({ isActive }) => (isActive ? 'transparent' : 'white')};
   }
 
   &::before {
-    top: ${({ isActive }) => (isActive ? '0' : '-0.5rem')};
+    top: ${({ isActive, ratio }) => (isActive ? '0' : `-${0.625 * ratio}rem`)};
     transform: ${({ isActive }) =>
       isActive ? 'rotate(45deg) scale(1.5)' : ''};
   }
 
   &::after {
-    bottom: ${({ isActive }) => (isActive ? '0' : '-0.5rem')};
+    bottom: ${({ isActive, ratio }) =>
+      isActive ? '0' : `-${0.625 * ratio}rem`};
     transform: ${({ isActive }) =>
       isActive ? 'rotate(-45deg) scale(1.5)' : ''};
   }
 `;
 
 const IconWrapper = styled.div`
-  height: 2rem;
+  content: '';
   position: relative;
-  width: 1.5rem;
-  line-height: 2rem;
-  margin-right: 0.5rem;
+  height: ${props => `${props.ratio * ICON_SIZE}rem`};
+  width: ${props => `${props.ratio * ICON_SIZE}rem`};
   z-index: 1000;
   cursor: pointer;
 `;
 
-const Toggler = ({ isActive, handleToggle }) => (
-  <IconWrapper
-    onClick={handleToggle}
-    onTouchEnd={e => {
-      handleToggle(e);
-      e.preventDefault;
-    }}
-  >
-    <Icon isActive={isActive} />
-  </IconWrapper>
-);
+/**
+ * Toggler with animation.
+ *
+ * This component use both touch event and click event to avoid the possible
+ * delay for click event on mobile browsers
+ *
+ * @param {bool} isActive
+ * @param {function} handleToggle - Handler to be called when user click/touch the coponent
+ * @param {number} ratio - scale of this icon, result height is (scale * 2) rem;
+ */
+const Toggler = props => {
+  const { isActive, handleToggle, ratio = 1, ...rests } = props;
+  return (
+    <IconWrapper
+      ratio={ratio}
+      onClick={handleToggle}
+      onTouchEnd={e => {
+        e.preventDefault();
+        handleToggle(e);
+      }}
+      {...rests}
+    >
+      <Icon ratio={ratio} isActive={isActive} />
+    </IconWrapper>
+  );
+};
 
 export default Toggler;

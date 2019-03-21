@@ -24,13 +24,24 @@ const Progress = styled.div`
 /**
  *
  *
- * @param {*} props
- * @returns
+ * @param height {number}
+ * @param backgroundColor {string} color for progress bar wrapper
+ * @param progressColor {string} color for the moving progress
  */
 const ProgressBar = props => {
-  const { height, backgroundColor, progressColor, percentage } = props;
+  const {
+    height,
+    backgroundColor,
+    progressColor,
+    percentage,
+    ...rests
+  } = props;
   return (
-    <ProgressBarWrapper height={height} backgroundColor={backgroundColor}>
+    <ProgressBarWrapper
+      height={height}
+      backgroundColor={backgroundColor}
+      {...rests}
+    >
       <Progress
         height={height}
         progressColor={progressColor}

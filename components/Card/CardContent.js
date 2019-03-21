@@ -4,8 +4,8 @@ const CardContentWrapper = styled.div`
   padding: ${({ theme }) => `${theme.basePadding}rem`};
 `;
 const CardContent = props => {
-  const { children } = props;
-  return <CardContentWrapper>{children}</CardContentWrapper>;
+  const { children, ...rests } = props;
+  return <CardContentWrapper {...rests}>{children}</CardContentWrapper>;
 };
 
 export default CardContent;

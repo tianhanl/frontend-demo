@@ -14,8 +14,8 @@ const CardActinsWrapper = styled.div`
  * @returns
  */
 const CardActions = props => {
-  const { children } = props;
-  return <CardActinsWrapper>{children}</CardActinsWrapper>;
+  const { children, ...rests } = props;
+  return <CardActinsWrapper {...rests}>{children}</CardActinsWrapper>;
 };
 
 export default CardActions;

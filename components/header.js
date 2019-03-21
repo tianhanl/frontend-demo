@@ -14,6 +14,15 @@ const HeaderWrapper = styled.header`
   z-index: 100;
 `;
 
+const DrawerTitle = styled.h2`
+  color: ${({ color, theme }) => color || theme.white};
+  text-align: center;
+`;
+
+const Icon = styled.img`
+  height: 2rem;
+`;
+
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -32,10 +41,10 @@ class Header extends React.Component {
     const { isActive } = this.state;
     return (
       <HeaderWrapper>
-        <p>test</p>
+        <Icon src={'../static/logo.png'} />
         <Toggler isActive={isActive} handleToggle={this.handleToggle} />
         <Drawer isOpen={isActive}>
-          <h1>Test</h1>
+          <DrawerTitle>Test</DrawerTitle>
         </Drawer>
       </HeaderWrapper>
     );

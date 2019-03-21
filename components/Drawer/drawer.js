@@ -16,12 +16,13 @@ const DrawerWrapper = styled.div`
   @param {bool} isOpen - Is the drawer open
 */
 const Drawer = props => {
-  const { children, isOpen, width, backgroundColor } = props;
+  const { children, isOpen, width, backgroundColor, ...rests } = props;
   return (
     <DrawerWrapper
       isOpen={isOpen}
       width={width}
       backgroundColor={backgroundColor}
+      {...rests}
     >
       {children}
     </DrawerWrapper>

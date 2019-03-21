@@ -12,9 +12,9 @@ const CardMeidaImage = styled.img`
 `;
 
 const CardMedia = props => {
-  const { imageSrc, imageHeight } = props;
+  const { imageSrc, imageHeight, ...rests } = props;
   return (
-    <CardMediaWrapper>
+    <CardMediaWrapper {...rests}>
       {imageSrc && <CardMeidaImage height={imageHeight} src={imageSrc} />}
     </CardMediaWrapper>
   );

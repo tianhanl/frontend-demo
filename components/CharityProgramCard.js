@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardMedia, CardActions } from './Card';
 import { ProgressBar } from './ProgressBar';
+import { NumberDisplay } from './NumberDisplay';
 
 const StyledLink = styled.a`
   color: ${({ theme }) => theme.white};
@@ -12,6 +13,27 @@ const StyledLink = styled.a`
   &::after {
     content: ' >';
   }
+`;
+
+const StyledCardHeader = styled(CardHeader)`
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 1rem;
+`;
+
+const TermProgressWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const FluidWrapper = styled.div`
+  flex: 1;
+`;
+
+const TermLabel = styled.span`
+  font-size: ${({ theme }) => theme.display3};
+  color: ${({ color, theme }) => color || theme.darkBlue};
+  margin-left: 0.5rem;
 `;
 
 const ItemsWrapper = styled.div`
@@ -25,7 +47,7 @@ const ItemsWrapper = styled.div`
   overflow: hidden;
 `;
 
-const FluidItemWrapper = styled.div`
+const FluidNumberDisplay = styled(NumberDisplay)`
   flex-grow: 1;
   flex-basis: 0;
 `;
@@ -34,59 +56,82 @@ const HalfPixelVerticalLine = styled.div`
   border-left: solid 1px;
   transform: scaleX(0.5);
   padding: 0 ${({ padding = 1, theme }) => `${padding * theme.basePadding}rem`};
+  color: ${({ color, theme }) => color || theme.darkBlue};
 `;
 
 class CharityProgramCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: 'test',
-      subtitle: 'test',
-      imageSrc: '/static/test.png',
-      programTargetNumber: 15000000,
-      programRasiedNumber: 1234825,
-      readMoreUrl: '#'
-    };
-  }
-
   programProgressPercentage = () => {
-    const { programTargetNumber, programRasiedNumber } = this.state;
-    return Math.floor((programRasiedNumber / programTargetNumber) * 100);
+    const { program = this.defaultProgram } = this.props;
+    const { programTargetNumber, programRasiedNumber } = program;
+    if (programRasiedNumber)
+      return Math.floor((programRasiedNumber / programTargetNumber) * 100);
   };
 
   render() {
-    const { title, subtitle, imageSrc, readMoreUrl } = this.state;
+    const { theme, program, ...rests } = this.props;
+    const {
+      title,
+      subtitle,
+      imageSrc,
+      programTargetNumber,
+      programTargetText,
+      programRasiedNumber,
+      programRasiedText,
+      userDonationNumber,
+      userDonationText,
+      userContributionNumber,
+      userContributionText,
+      userContributionUnit,
+      term,
+      readMoreUrl
+    } = program;
     return (
-      <Card>
+      <Card {...rests}>
         <CardMedia imageSrc={imageSrc} />
-        <CardHeader title={title} subtitle={subtitle} />
+        <StyledCardHeader title={title} subtitle={subtitle} />
         <CardContent>
-          <ProgressBar
-            height={0.5}
-            percentage={this.programProgressPercentage()}
-          />
+          <TermProgressWrapper>
+            <FluidWrapper>
+              <ProgressBar
+                height={0.5}
+                percentage={this.programProgressPercentage()}
+              />
+            </FluidWrapper>
+            <TermLabel>{term}</TermLabel>
+          </TermProgressWrapper>
+
           <ItemsWrapper paddingX={0}>
-            <FluidItemWrapper>
-              <h3>Test</h3>
-            </FluidItemWrapper>
+            <FluidNumberDisplay
+              labelText={programTargetText}
+              number={programTargetNumber}
+            />
             <HalfPixelVerticalLine />
-            <FluidItemWrapper>
-              <h3>Test</h3>
-            </FluidItemWrapper>
+            <FluidNumberDisplay
+              labelText={programRasiedText}
+              number={programRasiedNumber}
+            />
           </ItemsWrapper>
           <ItemsWrapper isLight>
-            <FluidItemWrapper>
-              <h3>Test</h3>
-            </FluidItemWrapper>
-            <HalfPixelVerticalLine />
-            <FluidItemWrapper>
-              <h3>Test</h3>
-            </FluidItemWrapper>
+            <FluidNumberDisplay
+              labelText={userDonationText}
+              number={userDonationNumber}
+              labelColor={theme.blue}
+              numberColor={theme.white}
+            />
+            <HalfPixelVerticalLine color={theme.blue} />
+            <FluidNumberDisplay
+              labelText={userContributionText}
+              number={userContributionNumber}
+              unit={userContributionUnit}
+              labelColor={theme.blue}
+              numberColor={theme.white}
+              unitColor={theme.white}
+            />
           </ItemsWrapper>
         </CardContent>
         <CardActions>
-          <Link>
-            <StyledLink href={readMoreUrl}>获取更多爱心</StyledLink>
+          <Link href={readMoreUrl || ''}>
+            <StyledLink>获取更多爱心</StyledLink>
           </Link>
         </CardActions>
       </Card>
@@ -94,4 +139,4 @@ class CharityProgramCard extends React.Component {
   }
 }
 
-export default CharityProgramCard;
+export default withTheme(CharityProgramCard);

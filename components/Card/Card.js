@@ -7,8 +7,8 @@ const CardWrapper = styled.div`
 `;
 
 const Card = props => {
-  const { children } = props;
-  return <CardWrapper>{children}</CardWrapper>;
+  const { children, ...rests } = props;
+  return <CardWrapper {...rests}>{children}</CardWrapper>;
 };
 
 export default Card;
