@@ -2,13 +2,13 @@
 
 ## Folder Structures
 
-These folder are intensionally placed user root folder to follow the content of
-`next`
+These folders are intensionally placed under root folder to follow the convention of
+`next.js`
 
 `pages` - top level pages
 
 `components` - individual components. General compoents will be placed int their
-perspective foldres, and top level components for pages will be placed under
+own foldres, and top level components for pages will be placed under
 folder root.
 
 `static` - staitc files (images, etc.)
@@ -26,7 +26,7 @@ npm run dev
 ## Production
 
 ```bash
-# If have not installed
+# If packages have not been installed
 npm i
 
 # Creates static files
