@@ -1,5 +1,6 @@
 import styled, { withTheme } from 'styled-components';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 import { Card, CardContent, CardHeader, CardMedia, CardActions } from './Card';
 import { ProgressBar } from './ProgressBar';
 import { NumberDisplay } from './NumberDisplay';
@@ -59,9 +60,17 @@ const HalfPixelVerticalLine = styled.div`
   color: ${({ color, theme }) => color || theme.darkBlue};
 `;
 
+/**
+ * Composite Card for displaying Program data
+ *
+ * @param {object} theme
+ * @param {object} program
+ * @class CharityProgramCard
+ * @extends {React.Component}
+ */
 class CharityProgramCard extends React.Component {
   programProgressPercentage = () => {
-    const { program = this.defaultProgram } = this.props;
+    const { program } = this.props;
     const { programTargetNumber, programRasiedNumber } = program;
     if (programRasiedNumber)
       return Math.floor((programRasiedNumber / programTargetNumber) * 100);
@@ -138,5 +147,10 @@ class CharityProgramCard extends React.Component {
     );
   }
 }
+
+CharityProgramCard.propTypes = {
+  theme: PropTypes.object,
+  program: PropTypes.object
+};
 
 export default withTheme(CharityProgramCard);
