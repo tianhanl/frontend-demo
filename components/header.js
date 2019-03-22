@@ -23,6 +23,12 @@ const Icon = styled.img`
   height: 2rem;
 `;
 
+/**
+ * Shared Header for this project
+ *
+ * @class Header
+ * @extends {React.Component}
+ */
 class Header extends React.Component {
   constructor(props) {
     super(props);
