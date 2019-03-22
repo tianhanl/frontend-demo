@@ -7,8 +7,8 @@ const FooterWrapper = styled.div`
 `;
 
 const Footer = props => {
-  const { children } = props;
-  return <FooterWrapper />;
+  const { children, ...rest } = props;
+  return <FooterWrapper {...rest}>{children}</FooterWrapper>;
 };
 
 export default Footer;
