@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const DrawerWrapper = styled.div`
   position: fixed;
@@ -14,6 +15,8 @@ const DrawerWrapper = styled.div`
 /** 
   Drawer component
   @param {bool} isOpen - Is the drawer open
+  @param {string} width
+  @param {string} backgroundColor - backgroundColor of drawer
 */
 const Drawer = props => {
   const { children, isOpen, width, backgroundColor, ...rests } = props;
@@ -27,6 +30,13 @@ const Drawer = props => {
       {children}
     </DrawerWrapper>
   );
+};
+
+Drawer.propTypes = {
+  isOpen: PropTypes.bool,
+  width: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  children: PropTypes.node
 };
 
 export default Drawer;
