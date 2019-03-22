@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import PropTypes from 'prop-types';
 const ICON_SIZE = 2;
 
 const Icon = styled.span`
@@ -69,6 +69,12 @@ const Toggler = props => {
       <Icon ratio={ratio} isActive={isActive} />
     </IconWrapper>
   );
+};
+
+Toggler.propTypes = {
+  isActive: PropTypes.bool,
+  handleToggle: PropTypes.func.isRequired,
+  ratio: PropTypes.number
 };
 
 export default Toggler;
