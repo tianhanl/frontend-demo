@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const CardActinsWrapper = styled.div`
   display: flex;
@@ -8,14 +9,15 @@ const CardActinsWrapper = styled.div`
 `;
 
 /**
- * Card Actions Container
- *
- * @param {*} props
- * @returns
+ * Wrapper for actions of Card
  */
 const CardActions = props => {
   const { children, ...rests } = props;
   return <CardActinsWrapper {...rests}>{children}</CardActinsWrapper>;
+};
+
+CardActions.propTypes = {
+  children: PropTypes.node
 };
 
 export default CardActions;
