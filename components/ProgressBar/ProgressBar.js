@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const RADIUS_CONSTANT = 0.375;
 
@@ -24,9 +25,10 @@ const Progress = styled.div`
 /**
  *
  *
- * @param height {number}
- * @param backgroundColor {string} color for progress bar wrapper
- * @param progressColor {string} color for the moving progress
+ * @param {number} height
+ * @param {string} backgroundColor  color for progress bar wrapper
+ * @param {string} progressColor  color for the moving progress
+ * @param {number} percentage
  */
 const ProgressBar = props => {
   const {
@@ -49,6 +51,13 @@ const ProgressBar = props => {
       />
     </ProgressBarWrapper>
   );
+};
+
+ProgressBar.propTypes = {
+  height: PropTypes.number,
+  backgroundColor: PropTypes.string,
+  progressColor: PropTypes.string,
+  percentage: PropTypes.number
 };
 
 export default ProgressBar;

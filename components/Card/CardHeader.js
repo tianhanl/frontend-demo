@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const CardHeaderWrapper = styled.div`
   padding: ${({ theme }) => `${theme.basePadding}rem`};
@@ -18,6 +19,12 @@ const CardHeaderSubtitle = styled.h3`
   font-size: ${({ theme }) => theme.display2};
 `;
 
+/**
+ * Header part of a Card
+ *
+ * @param {string} title
+ * @param {string} subtitle
+ */
 const CardHeader = props => {
   const { title, subtitle, children, ...rests } = props;
   return (
@@ -27,6 +34,11 @@ const CardHeader = props => {
       {children}
     </CardHeaderWrapper>
   );
+};
+
+CardHeader.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string
 };
 
 export default CardHeader;

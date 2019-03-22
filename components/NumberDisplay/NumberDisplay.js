@@ -1,5 +1,6 @@
 import { transformNumber } from '../../utils';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledP = styled.p`
   margin-top: 0;
@@ -23,6 +24,15 @@ const UnitLabel = styled.span`
   margin-left: 0.25rem;
 `;
 
+/**
+  Displays a number with optional label and unit
+  @param {string} labelText
+  @param {number} number,
+  @param {string} unit,
+  @param {string} labelColor,
+  @param {string} numberColor,
+  @param {string} unitColor,
+*/
 const NumberDisplay = props => {
   const {
     labelText,
@@ -43,4 +53,14 @@ const NumberDisplay = props => {
     </div>
   );
 };
+
+NumberDisplay.propTypes = {
+  labelText: PropTypes.string,
+  number: PropTypes.number,
+  unit: PropTypes.string,
+  labelColor: PropTypes.string,
+  numberColor: PropTypes.string,
+  unitColor: PropTypes.string
+};
+
 export default NumberDisplay;

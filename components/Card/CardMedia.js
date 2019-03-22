@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const CardMediaWrapper = styled.div`
   width: 100%;
@@ -11,6 +12,12 @@ const CardMeidaImage = styled.img`
   height: ${({ height }) => height || 'auto'};
 `;
 
+/**
+ * Media(Image, etc.) for Card
+ *
+ * @param {string} imageSrc
+ * @param {string} imageHeight
+ */
 const CardMedia = props => {
   const { imageSrc, imageHeight, ...rests } = props;
   return (
@@ -18,6 +25,11 @@ const CardMedia = props => {
       {imageSrc && <CardMeidaImage height={imageHeight} src={imageSrc} />}
     </CardMediaWrapper>
   );
+};
+
+CardMedia.propTypes = {
+  imageSrc: PropTypes.string,
+  imageHeight: PropTypes.string
 };
 
 export default CardMedia;

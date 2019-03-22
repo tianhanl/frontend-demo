@@ -22,17 +22,19 @@ const FluidWrapper = styled.div`
   position: relative;
 `;
 
-const StyledLoading = styled(ReactLoading)`
+const LoadingWrapper = styled.div`
   position: absolute;
-  top: ${({ open }) => (open ? '20%' : '-100%')};
-  opacity: ${({ open }) => (open ? 1 : 0)};
+  top: ${({ isOpen }) => (isOpen ? '20%' : '-100%')};
+  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
   left: 40%;
   transition: all 0.3s ease-in-out;
+  height: 20%;
+  width: 20%;
   z-index: 20;
 `;
 
 const StyledCharityProgramCard = styled(CharityProgramCard)`
-  opacity: ${({ invisible }) => (invisible ? 0 : 1)};
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   transition: opacity 0.2s ease-in-out;
 `;
 
@@ -40,7 +42,7 @@ const ErrorLabel = styled.h3`
   margin-top: 30%;
   text-align: center;
   color: ${({ theme }) => theme.red || 'red'};
-  opacity: ${({ invisible }) => (invisible ? 0 : 1)};
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   transition: opacity 0.2s ease-in-out;
 `;
 
@@ -96,19 +98,23 @@ class IndexPage extends React.Component {
         </Head>
         <Header />
         <FluidWrapper>
-          <StyledLoading
-            type={'spin'}
-            color={'white'}
-            height={'20%'}
-            width={'20%'}
-            open={isLoading}
-          />
+          <LoadingWrapper isOpen={isLoading}>
+            <ReactLoading
+              type={'spin'}
+              color={'white'}
+              height={'100%'}
+              width={'100%'}
+            />
+          </LoadingWrapper>
           {isError ? (
-            <ErrorLabel invisible={isLoading}>
+            <ErrorLabel isVisible={!isLoading}>
               Data are currenly unavailable
             </ErrorLabel>
           ) : (
-            <StyledCharityProgramCard invisible={isLoading} program={program} />
+            <StyledCharityProgramCard
+              isVisible={!isLoading}
+              program={program}
+            />
           )}
         </FluidWrapper>
         <Footer />
